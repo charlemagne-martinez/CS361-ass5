@@ -21,6 +21,15 @@ def home():
 def createOrSaveQR():
     if request.method == "POST":
         if 'url' in request.form:
+
+            # https://stackoverflow.com/questions/16965396/how-i-check-in-flask-that-field-from-form-was-filled-by-user
+            # AYYY, it work. Handle if nothing was entered into the input field
+            checkUrl = request.form['url']
+            if checkUrl == "":
+                start = True
+                empty = True
+                return render_template("index.html", start=start, empty=empty)
+
             # https://stackoverflow.com/questions/11556958/sending-data-from-html-form-to-a-python-script-in-flask
             url = request.form['url']
             img = qrcode.make(url)
@@ -58,7 +67,6 @@ def saveQRClicked():
             saveVal = True
             saveMessage = "The QR code has been saved. Check your Downloads folder!"
 
-
             return render_template("index.html", saveMsg=saveMessage, save=saveVal)
 
 
@@ -68,7 +76,6 @@ def backButton():
         if 'anotherOne' in request.form:
             start = True
             return render_template("index.html", start=start)
-
 
 
 if __name__ == "__main__":

@@ -1,0 +1,108 @@
+html
+{
+    font-family: "Varela", sans-serif;
+}
+
+body
+{
+    margin: 0px;
+    padding: 0px;
+    background-color: #121212;
+    color: whitesmoke;
+}
+
+button
+{
+    font-family: "Varela", sans-serif;
+    font-size: 1em;
+
+}
+
+.urlInput
+{
+    padding: 20px;
+    width: 400px;
+    font-size: 10pt;
+}
+
+.urlInput::placeholder
+{
+    font-family: "Varela", sans-serif;
+    opacity: 1;
+    font-size: 1em;
+    text-align: center;
+}
+
+.title
+{
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+    padding: 2em;
+
+}
+
+.input
+{
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+    padding: 2em;
+}
+
+
+.tooltip-home
+{
+    left: 1;
+    bottom: 0;
+}
+
+.questionMarkIcon
+{
+    position: absolute;
+    left: 1;
+    bottom: 0;
+    filter: invert(100%);
+}
+
+.tooltip-home:hover .tooltip-text-home
+{
+    visibility: visible;
+}
+
+.tooltip-text-home
+{
+    visibility: hidden;
+    position: absolute;
+    color: #121212;
+    width: 300px;
+    background-color: #d3d3d3;
+    border-radius: 20px;
+    padding: 20px 20px 20px 20px;
+    margin-left: 20px;
+    margin-bottom: 40px;
+
+}
+
+
+.qrCodeCreated
+{
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+    padding: 2em;
+}
+
+.saveOrCreateAnotherOne
+{
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+    padding: 2em;
+
+
+}
