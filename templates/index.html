@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title> CS361 assignment 5 </title>
+
+
+    </head>
+
+    <body>
+        <main>
+            <img src="/static/qr-code-g492409197_640.png" alt="Picture of QR Code">
+            <h1> Welcome to the QR Code Generator!! </h1>
+
+            <div>
+                <h2> Please copy and paste a website URL of your choice below to create a QR code: </h2>
+                <form action="/" method="post">
+                    <input type="text" name="url" placeholder="i.e.: https://goo.gl/maps/bQNKajGah218Dt8w7">
+                    <button type="submit"> Create QR code! </button>
+
+                </form>
+            </div>
+
+            <!-- https://stackoverflow.com/questions/42228920/how-to-add-single-if-statement-in-flask -->
+            {% if data %}
+            <div class="qrCodeCreated">
+                <img src="{{data}}" alt="Generated QR code">
+                <p> Look, a generated QR code!! </p>
+
+            </div>
+            {% endif %}
+
+
+
+
+
+        </main>
+    </body>
+
+
+
+
+</html>
