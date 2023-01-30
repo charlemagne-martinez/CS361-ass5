@@ -4,23 +4,33 @@
     <head>
         <meta charset="utf-8">
         <title> CS361 assignment 5 </title>
+        <!-- none seem to work for changing favicon I got from image on pixabay -->
+        <link rel="icon" type="image/ico" href="/static/favicon.ico">
+        <link rel="shortcut icon" type="image/x-icon" href="/static/favicon.ico">
 
 
     </head>
 
     <body>
         <main>
+            <!-- idea: have if statement in first route i have in main.py to show this?? -->
+
+            {% if start %}
             <img src="/static/qr-code-g492409197_640.png" alt="Picture of QR Code">
             <h1> Welcome to the QR Code Generator!! </h1>
+
 
             <div>
                 <h2> Please copy and paste a website URL of your choice below to create a QR code: </h2>
                 <form action="/" method="post">
                     <input type="text" name="url" placeholder="i.e.: https://goo.gl/maps/bQNKajGah218Dt8w7">
-                    <button type="submit"> Create QR code! </button>
+                    <button type="submit" name="url"> Create QR code! </button>
 
                 </form>
             </div>
+
+            {% endif %}
+
 
             <!-- https://stackoverflow.com/questions/42228920/how-to-add-single-if-statement-in-flask -->
             {% if data %}
@@ -28,10 +38,33 @@
                 <img src="{{data}}" alt="Generated QR code">
                 <p> Look, a generated QR code!! </p>
 
+
+                <form action="/save" method="post">
+                    <button type="submit" name="save"> Save QR code! </button>
+                </form>
+
+                <form action="/goBackAndCreateAnotherOne" method="post">
+                    <button type="submit" name="anotherOne"> Create Another QR Code! </button>
+
+                </form>
+
             </div>
             {% endif %}
 
 
+            {% if save %}
+            <div>
+                <p> {{ saveMsg }} </p>
+
+                <form action="/goBackAndCreateAnotherOne" method="post">
+                    <button type="submit" name="anotherOne"> Create Another QR Code! </button>
+
+                </form>
+
+
+                <!-- have a go back button and a corresponding Flask view/route?? -->
+            </div>
+            {% endif %}
 
 
 

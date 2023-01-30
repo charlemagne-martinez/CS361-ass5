@@ -7,35 +7,67 @@ from flask import Flask, render_template, request
 import io
 import base64
 from PIL import Image
+import shutil
 
 app = Flask(__name__)
 
 @app.route("/")
 def home():
-    return render_template("index.html")
+    start = True
+    return render_template("index.html", start=start)
+
 
 @app.route("/", methods=['POST'])
-def createQR():
-    # https://stackoverflow.com/questions/11556958/sending-data-from-html-form-to-a-python-script-in-flask
-    url = request.form['url']
-    img = qrcode.make(url)
-    type(img)
-    img.save("qrCode.png")
+def createOrSaveQR():
+    if request.method == "POST":
+        if 'url' in request.form:
+            # https://stackoverflow.com/questions/11556958/sending-data-from-html-form-to-a-python-script-in-flask
+            url = request.form['url']
+            img = qrcode.make(url)
+            type(img)
+            img.save("qrCode.png")
 
-    data = io.BytesIO()
-    img.save(data, "PNG")
-    encodedImgData = base64.b64encode(data.getvalue())
-    # type(img)
-    # img.show()
+            # https://buraksenol.medium.com/pass-images-to-html-without-saving-them-as-files-using-python-flask-b055f29908a
+            # was trying something earlier w/o saving to static folder but ehhh ...
+            # data = io.BytesIO()
+            # img.save(data, "PNG")
+            # encodedImgData = base64.b64encode(data.getvalue())
+            # type(img)
+            # img.show()
 
-    # https://stackoverflow.com/questions/28207761/where-does-flask-look-for-image-files !!!
-    # https://stackoverflow.com/questions/8858008/how-to-move-a-file-in-python
-    qrCodePath = Path(str(Path.cwd()) + "/qrCode.png").rename(str(Path.cwd()) + "/static/qrCode.png")
+            # https://stackoverflow.com/questions/28207761/where-does-flask-look-for-image-files !!!
+            # https://stackoverflow.com/questions/8858008/how-to-move-a-file-in-python
+            qrCodePath = Path(str(Path.cwd()) + "/qrCode.png").rename(str(Path.cwd()) + "/static/qrCode.png")
 
-    return render_template("index.html", data="/static/qrCode.png")
+            return render_template("index.html", data="/static/qrCode.png")
 
 
+@app.route("/save", methods=['POST'])
+def saveQRClicked():
+    if request.method == "POST":
+        if 'save' in request.form:
+            # https://stackoverflow.com/questions/35851281/python-finding-the-users-downloads-folder
+            # (referenced for using os library to get specific path. not sure if it will work for Winows as am using Mac)
+            source = str(os.path.join(Path.cwd(), "static", "qrCode.png"))
+            dest = str(os.path.join(Path.home(), "Downloads", "qrCode.png"))
 
+            # https://stackoverflow.com/questions/123198/how-to-copy-files
+            shutil.copyfile(source, dest)
+
+            #data = True
+            saveVal = True
+            saveMessage = "The QR code has been saved. Check your Downloads folder!"
+
+
+            return render_template("index.html", saveMsg=saveMessage, save=saveVal)
+
+
+@app.route("/goBackAndCreateAnotherOne", methods=['POST'])
+def backButton():
+    if request.method == "POST":
+        if 'anotherOne' in request.form:
+            start = True
+            return render_template("index.html", start=start)
 
 
 
