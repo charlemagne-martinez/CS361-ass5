@@ -4,9 +4,9 @@ from pathlib import Path
 import os
 
 from flask import Flask, render_template, request
-import io
-import base64
-from PIL import Image
+# import io
+# import base64
+# from PIL import Image
 import shutil
 
 app = Flask(__name__)
@@ -82,6 +82,7 @@ if __name__ == "__main__":
     app.run(host="127.0.0.1", port=7676, debug=True)
 
 
+# what I had before with command line, before using Flask and such
 # # https://pypi.org/project/qrcode/
 # # (referenced this library to create qr codes)
 # def main():

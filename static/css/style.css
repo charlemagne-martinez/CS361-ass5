@@ -1,14 +1,20 @@
 html
 {
     font-family: "Varela", sans-serif;
+    height: 100%;
 }
 
+/* https://stackoverflow.com/questions/147528/how-do-i-force-a-div-block-to-extend-to-the-bottom-of-a-page-even-if-it-has-no-c */
+/* seemed to help with container not extending for full length of screen */
 body
 {
     margin: 0px;
     padding: 0px;
     background-color: #121212;
     color: whitesmoke;
+    position: relative;
+    height: 100%;
+
 }
 
 button
@@ -16,6 +22,14 @@ button
     font-family: "Varela", sans-serif;
     font-size: 1em;
 
+}
+
+
+button:hover
+{
+    font-family: "Varela", sans-serif;
+    font-size: 1em;
+    cursor:pointer;
 }
 
 .urlInput
@@ -53,17 +67,13 @@ button
 }
 
 
-.tooltip-home
-{
-    left: 1;
-    bottom: 0;
-}
 
-.questionMarkIcon
+/* https://www.w3schools.com/css/css_positioning.asp */
+.questionMarkIcon-home
 {
     position: absolute;
-    left: 1;
-    bottom: 0;
+    left: 5px;
+    bottom: 5px;
     filter: invert(100%);
 }
 
@@ -76,13 +86,45 @@ button
 {
     visibility: hidden;
     position: absolute;
+    left: 75px;
+    bottom: 15px;
+    color: #121212;
+    width: 550px;
+    background-color: #d3d3d3;
+    border-radius: 10px;
+    padding: 15px;
+
+
+}
+
+
+
+.questionMarkIcon-save
+{
+    position: absolute;
+    right: 450px;
+    top: 40px;
+    filter: invert(100%);
+}
+
+.tooltip-save:hover .tooltip-text-save
+{
+visibility: visible;
+
+}
+
+.tooltip-text-save
+{
+    visibility: hidden;
+    position: absolute;
+    right: 250px;
+    top: 80px;
     color: #121212;
     width: 300px;
     background-color: #d3d3d3;
     border-radius: 20px;
     padding: 20px 20px 20px 20px;
-    margin-left: 20px;
-    margin-bottom: 40px;
+
 
 }
 

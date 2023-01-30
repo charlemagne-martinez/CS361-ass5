@@ -18,6 +18,7 @@
         <main>
             <!-- idea: have if statement in first route i have in main.py to show this?? -->
 
+            <!-- https://pythonprogramming.altervista.org/flask-7-the-if-condition/?doing_wp_cron=1675069908.5962669849395751953125 -->
             {% if start %}
             <div class="title">
                 <img src="/static/qr-code-g492409197_640.png" alt="Picture of QR Code" width="240" height="240">
@@ -34,7 +35,7 @@
                 </form>
 
              {% if empty %}
-             <p> Woops, looks like you tried to enter nothing! Please paste in a website url and try again. </p>
+             <p> Woops, it looks like nothing was entered. Please paste in a website url and click 'Create QR code!' again. </p>
              {% endif %}
 
             </div>
@@ -42,9 +43,9 @@
 
             <!-- https://blog.hubspot.com/website/html-tooltip referenced -->
             <div class="tooltip-home">
-                <img src="/static/questionMark.png" alt="Question mark tooltip" width="64" height="64" class="questionMarkIcon">
+                <img src="/static/questionMark.png" alt="Question mark tooltip" width="64" height="64" class="questionMarkIcon-home">
                 <span class="tooltip-text-home">
-                    A QR code is a kind of code, that when scanned by a camera, can bring you to websites, among other things.
+                    A QR code is a kind of code, that when scanned by a camera on a phone, laptop, or computer, can bring you to websites, among other things.
                     To use this QR code generator, first go to a website of your choosing and copy its url.
                     Then, paste it into the text box and click the button to create a QR code.
                     After, a QR code will display, and you will have the options to save and/or create another QR code.
@@ -59,6 +60,7 @@
             <div class="qrCodeCreated">
                 <img src="{{data}}" alt="Generated QR code">
                 <p> Look, a generated QR code!! </p>
+                <p> Try scanning it with a phone camera! </p>
 
 
                 <form action="/save" method="post">
@@ -74,9 +76,24 @@
             {% endif %}
 
 
+            <!-- https://stackoverflow.com/questions/42601478/flask-calling-python-function-on-button-onclick-event -->
+            <!-- https://stackoverflow.com/questions/46482475/how-handle-a-button-click-on-python-flask -->
+            <!-- https://stackoverflow.com/questions/19794695/flask-python-buttons -->
             {% if save %}
             <div class="saveOrCreateAnotherOne">
                 <p> {{ saveMsg }} </p>
+
+
+
+            <div class="tooltip-save">
+                <img src="/static/questionMark.png" alt="Question mark tooltip" width="32" height="32" class="questionMarkIcon-save">
+                <span class="tooltip-text-save">
+                    >>Downloads folder on Mac: Click Finder app -> Look at sidebar for "Downloads" -> Click on "Downloads".
+
+                    >>Downloads folder on Windows: Click File Explorer from taskbar or press Windows key + E -> Look at Quick Access on sidebar for "Downloads" -> Click on "Downloads".
+                </span>
+
+            </div>
 
                 <form action="/goBackAndCreateAnotherOne" method="post">
                     <button type="submit" name="anotherOne"> Create Another QR Code! </button>
